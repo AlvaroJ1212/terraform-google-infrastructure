@@ -1,3 +1,6 @@
+# Pin the provider version to avoid breaking changes on upgrade.
+# Credentials loaded from a local key file — in production,
+# prefer Workload Identity Federation or GOOGLE_APPLICATION_CREDENTIALS env var.
 terraform {
   required_providers {
     google = {

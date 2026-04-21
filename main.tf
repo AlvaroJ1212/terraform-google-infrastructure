@@ -1,46 +1,49 @@
-resource "google_project_service" "storage_api" {
-  project            = var.project_id
-  service            = "storage.googleapis.com"
-  disable_on_destroy = false
+# APIs must be enabled before any other resource can be created,
+# but we rely on implicit GCP behavior rather than explicit depends on
+# because most resources will retry until the API is active.
+module "apis" {
+  source     = "./modules/apis"
+  project_id = var.project_id
+  apis       = var.apis
 }
 
-resource "google_project_service" "apis" {
-  for_each           = toset(var.apis)
-  project            = var.project_id
-  service            = each.key
-  disable_on_destroy = false
-}
 
-resource "google_pubsub_topic" "notifications" {
-  project = var.project_id
-  name    = "tf-alvaro-notifications"
-
-  message_retention_duration = "86400s"
-}
-
-resource "google_pubsub_subscription" "notifications_sub" {
-  project = var.project_id
-  name    = "tf-alvaro-notifications-sub"
-  topic   = google_pubsub_topic.notifications.id
-
-  ack_deadline_seconds       = 60
-  message_retention_duration = "604800s"
-
-  expiration_policy {
-    ttl = ""
-  }
-}
-
+# Monitoring depends on storage and pubsub outputs
+# to build dashboard filters for the correct bucket and topic.
 module "monitoring" {
   source      = "./modules/monitoring"
   project_id  = var.project_id
   bucket_name = var.bucket_name
-  topic_name  = google_pubsub_topic.notifications.name
+  topic_name  = module.pubsub.topic_name
 }
+
+
 
 module "storage" {
   source      = "./modules/storage"
   project_id  = var.project_id
   region      = var.region
   bucket_name = var.bucket_name
+}
+
+module "pubsub" {
+  source     = "./modules/pubsub"
+  project_id = var.project_id
+  region     = var.region
+}
+
+module "repository" {
+  source     = "./modules/repository"
+  project_id = var.project_id
+  region     = var.region
+}
+
+# IAM bindings reference storage and pubsub outputs,
+# so Terraform will create those resources first automatically.
+module "iam" {
+  source      = "./modules/iam"
+  project_id  = var.project_id
+  sa_roles    = ["storage.admin", "pubsub.admin"]
+  bucket_name = module.storage.bucket_name
+  topic_name  = module.pubsub.topic_name
 }
