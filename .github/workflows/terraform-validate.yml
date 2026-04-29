@@ -20,12 +20,15 @@ jobs:
 
       - name: Terraform Format
         id: fmt
-        run: terraform fmt -check -recursive
+        # El format puede quedarse en la raíz porque usa -recursive
+        run: terraform fmt -check -recursive 
 
       - name: Terraform Init
         id: init
+        working-directory: ./envs/dev
         run: terraform init -backend=false
 
       - name: Terraform Validate
         id: validate
+        working-directory: ./envs/dev
         run: terraform validate -no-color
