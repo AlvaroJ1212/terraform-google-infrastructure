@@ -1,0 +1,19 @@
+# Google Cloud Project configuration
+project_id  = "my-example-project-12345"
+region      = "europe-west3"
+
+# Storage configuration
+bucket_name = "my-example-raw-data-bucket"
+
+# APIs to enable
+apis = [
+  "storage.googleapis.com",
+  "pubsub.googleapis.com",
+  "monitoring.googleapis.com",
+  "logging.googleapis.com",
+  "artifactregistry.googleapis.com",
+  "cloudfunctions.googleapis.com",
+  "cloudbuild.googleapis.com",
+  "run.googleapis.com",
+  "iam.googleapis.com",
+]
