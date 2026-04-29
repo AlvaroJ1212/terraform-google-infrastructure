@@ -20,9 +20,10 @@ module "pubsub" {
 }
 
 module "repository" {
-  source     = "git::https://github.com/AlvaroJ1212/terraform-google-repository.git?ref=v1.0.0"
-  project_id = var.project_id
-  region     = var.region
+  source        = "git::https://github.com/AlvaroJ1212/terraform-google-repository.git?ref=v1.0.0"
+  project_id    = var.project_id
+  repository_id = var.repository_id
+  region        = var.region
 }
 
 module "monitoring" {
