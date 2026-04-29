@@ -1,4 +1,6 @@
-variable "project_id" {type = string}
+variable "project_id" {
+  type = string
+}
 
 variable "region" {
   type    = string
@@ -10,6 +12,10 @@ variable "apis" {
   default = []
 }
 
-variable "bucket_name" {type = string}
+variable "bucket_name" {
+  type = string
+}
 
-variable "repository_id" {type = string}
+variable "repository_id" {
+  type = string
+}
