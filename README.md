@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🏗️ Enterprise Google Cloud Platform Infrastructure</h1>
+  <h1>🏗️ Google Cloud Platform Infrastructure</h1>
   <p><strong>A modular, event-driven, secure, and highly scalable GCP infrastructure provisioned with Terraform.</strong></p>
 </div>
 
