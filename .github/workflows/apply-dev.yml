@@ -1,0 +1,17 @@
+name: "Apply Dev"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "envs/dev/**"
+
+jobs:
+  apply:
+    uses: alvaro-gcp-platform/terraform-ci-workflows/.github/workflows/terraform-apply.yml@main
+    with:
+      working_directory: "envs/dev"
+      environment: "dev"
+      auto_approve: true
+    secrets:
+      GCP_CREDENTIALS: ${{ secrets.GCP_SA_KEY_DEV }}

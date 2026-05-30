@@ -1,0 +1,35 @@
+# Credentials and secrets
+*.json
+*.pem
+*.key
+*.p12
+*.credentials
+auth/
+
+# Terraform state
+*.tfstate
+*.tfstate.*
+*.tfplan
+
+# Environment variables
+*.tfvars
+*.auto.tfvars
+
+# Terraform plugins and cache
+.terraform/
+
+# Logs
+crash.log
+crash.*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

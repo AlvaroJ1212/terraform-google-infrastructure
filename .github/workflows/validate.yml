@@ -1,0 +1,20 @@
+name: "Validate All Environments"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate-dev:
+    uses: alvaro-gcp-platform/terraform-ci-workflows/.github/workflows/terraform-validate.yml@main
+    with:
+      working_directory: "envs/dev"
+
+  validate-prod:
+    uses: alvaro-gcp-platform/terraform-ci-workflows/.github/workflows/terraform-validate.yml@main
+    with:
+      working_directory: "envs/prod"
+
+  security:
+    uses: alvaro-gcp-platform/terraform-ci-workflows/.github/workflows/terraform-security.yml@main

@@ -1,0 +1,22 @@
+name: "Apply Prod"
+
+on:
+  workflow_dispatch:    # Solo ejecución manual
+
+jobs:
+  plan:
+    uses: alvaro-gcp-platform/terraform-ci-workflows/.github/workflows/terraform-plan.yml@main
+    with:
+      working_directory: "envs/prod"
+      environment: "prod"
+    secrets:
+      GCP_CREDENTIALS: ${{ secrets.GCP_SA_KEY_PROD }}
+
+  apply:
+    needs: plan
+    uses: alvaro-gcp-platform/terraform-ci-workflows/.github/workflows/terraform-apply.yml@main
+    with:
+      working_directory: "envs/prod"
+      environment: "prod"          # Requiere approval en GitHub Environment settings
+    secrets:
+      GCP_CREDENTIALS: ${{ secrets.GCP_SA_KEY_PROD }}
