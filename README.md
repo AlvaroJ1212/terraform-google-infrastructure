@@ -18,6 +18,20 @@ This repository acts as the **Root Orchestrator** (Config layer) for a complete 
 
 ---
 
+## 📦 Externalized Modules (Components)
+
+This infrastructure relies on the following decoupled repositories (Terraform *mods*). Click on any of them to view their source code, variables, and documentation:
+
+- [**terraform-google-apis**](https://github.com/[TU_USUARIO_U_ORGANIZACION]/terraform-google-apis) - Enables necessary GCP services and APIs.
+- [**terraform-google-network**](https://github.com/[TU_USUARIO_U_ORGANIZACION]/terraform-google-network) - Custom VPC, subnets, and routing.
+- [**terraform-google-storage**](https://github.com/[TU_USUARIO_U_ORGANIZACION]/terraform-google-storage) - Secure GCS buckets setup.
+- [**terraform-google-pubsub**](https://github.com/[TU_USUARIO_U_ORGANIZACION]/terraform-google-pubsub) - Event-driven messaging topics.
+- [**terraform-google-monitoring**](https://github.com/[TU_USUARIO_U_ORGANIZACION]/terraform-google-monitoring) - Dashboards and alerting configurations.
+- [**terraform-google-iam**](https://github.com/[TU_USUARIO_U_ORGANIZACION]/terraform-google-iam) - Service accounts and IAM bindings.
+- [**terraform-google-repository**](https://github.com/[TU_USUARIO_U_ORGANIZACION]/terraform-google-repository) - Artifact Registry setup.
+
+---
+
 ## 📐 Architecture Diagram
 
 ```mermaid
